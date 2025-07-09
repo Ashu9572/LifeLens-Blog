@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Travel - My Blog</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f8f9fa;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Clean Header Design */
+.blog-header {
+    background: linear-gradient(to right, #2c3e50, #34495e);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+    position: relative;
+}
+
+.blog-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('health.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+}
+
+.blog-header-content {
+    position: relative;
+    z-index: 1;
+}
+
+.blog-title {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.blog-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+/* Simple Breadcrumb */
+.breadcrumb {
+    background: white;
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.breadcrumb-nav {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.breadcrumb-nav a {
+    color: #2c3e50;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb-nav a:hover {
+    color: #3498db;
+    text-decoration: underline;
+}
+
+
+    /* Main Content */
+    .main-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      padding: 40px 0;
+      opacity: 0;
+      animation: fadeIn 0.5s ease-in forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .content-area {
+      background: white;
+      border-radius: 1px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    /* Featured Article */
+    .featured-article {
+      margin-bottom: 40px;
+    }
+
+    .article-image {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 1px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .article-content {
+      padding: 2rem;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .author-avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .blog-category {
+      background: #ff7e5f;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .article-title {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    .article-excerpt {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .read-more-btn {
+      display: inline-block;
+      background: #ff7e5f;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .read-more-btn:hover {
+      background: #ff6b47;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 126, 95, 0.4);
+    }
+
+    /* Article Grid */
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      padding: 0 2rem 2rem;
+    }
+
+    .article-card {
+      background: white;
+      border-radius: 1px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .article-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      color: #333;
+    }
+
+    .card-excerpt {
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .sidebar-widget {
+      background: white;
+      border-radius: 1px;
+      padding: 25px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .widget-title {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: #333;
+      font-weight: 700;
+    }
+
+    .popular-posts {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .popular-post {
+      display: flex;
+      gap: 12px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .popular-post:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .popular-post-image {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 1px;
+    
+    }
+
+    .popular-post-content h4 {
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .popular-post-content span {
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .icon {
+      color: #ff7e5f;
+      margin-right: 5px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: #f0f0f0;
+      color: #666;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .tag:hover {
+      background: #ff7e5f;
+      color: white;
+    }
+
+    .newsletter {
+      background: linear-gradient(135deg, #ac8379, #8a715e);
+      color: white;
+      text-align: center;
+      border-radius: 5px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .newsletter input {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      margin: 15px 0;
+      font-size: 16px;
+    }
+
+    .newsletter button {
+      background: white;
+      color: #ff7e5f;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer */
+.footer {
+    background-color: #222;
+    color: #fff;
+    padding: 60px 0 20px;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-column h3 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-column h3:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 30px;
+    height: 2px;
+    background: #4a90e2;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: #bbb;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #4a90e2;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-link {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: #333;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: background 0.3s;
+}
+
+.social-link:hover {
+    background: #4a90e2;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #444;
+    color: #999;
+    font-size: 14px;
+}
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .main-content {
+        grid-template-columns: 1fr;
+      }
+
+      .article-image {
+        height: 300px;
+      }
+
+      .article-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem 1rem;
+      }
+
+      .article-meta {
+        flex-wrap: wrap;
+      }
+    }
+  </style>
+
+</head>
+<body>
+  <header class="blog-header">
+        <div class="container">
+            <div class="blog-header-content">
+                <h1 class="blog-title">Health</h1>
+                <h2>Your Guide to Better Health</h2>
+                <p class="blog-subtitle">Discover tips on fitness, nutrition, mental wellness, and healthy living.</p>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-nav">
+                <h3>Categories</h3>
+                <a href="../index.html">Home</a> / <a href="travel.html">Travel</a> / <a href="food.html">Food</a> / <a href="technology.html">Technology</a> / <a href="lifestyle.html">Lifestyle</a> / <span>Health</span>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container">
+    <main class="main-content">
+      <div class="content-area">
+        <!-- Featured Article -->
+        <article class="featured-article">
+          <img src="https://images.pexels.com/photos/4998806/pexels-photo-4998806.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1">
+          <div class="article-content">
+            <span class="blog-category">Travel</span>
+            <h2 class="article-title">Hidden Temples of Bali: A Spiritual Journey Beyond the Tourist Trail</h2>
+            <p class="article-excerpt">
+              Venture beyond Bali's crowded beaches to discover ancient temple complexes where spirituality meets breathtaking architecture. From the cliff-hanging Pura Luhur Uluwatu to the mystical water temple of Tirta Empul, each sacred site tells a story of devotion, tradition, and the enduring power of faith in Balinese culture.
+            </p>
+            <div class="article-meta">
+              <div class="author-info">
+                <img src="https://media.licdn.com/dms/image/v2/D4D03AQHkH8St5JCIKg/profile-displayphoto-shrink_800_800/B4DZY4pBvpHsAk-/0/1744707002037?e=1753315200&v=beta&t=I6H94aQLubmqhQWQ-SuX4fn1H4p61HVH-80hHcrdWfg" alt="Sarah Chen" class="author-avatar">
+                <span>By Syraa Khalid</span>
+              </div>
+              <span>•</span>
+              <span>March 15, 2024</span>
+              <span>•</span>
+              <span>8 min read</span>
+            </div>
+            <a href="#" class="read-more-btn">Continue Reading</a>
+          </div>
+        </article>
+
+        <!-- Article Grid -->
+        <div class="article-grid">
+          <article class="article-card">
+            <img src="https://images.pexels.com/photos/3763879/pexels-photo-3763879.jpeg?auto=compress&cs=tinysrgb&w=1260&h=450&dpr=1">
+            <div class="card-content">
+              <span class="blog-category">Travel</span>
+              <h3 class="card-title">Lost Villages of Rural Japan: Where Time Stands Still</h3>
+              <p class="card-excerpt">
+                Experience traditional Japanese culture in remote mountain villages where ancient customs thrive and modern life feels worlds away.
+              </p>
+              <div class="article-meta">
+                <span>By Syraa Khalid • March 10, 2024</span>
+              </div>
+              <a href="#" class="read-more-btn">Read More</a>
+            </div>
+          </article>
+
+          <article class="article-card">
+            <img src="https://images.pexels.com/photos/6246401/pexels-photo-6246401.jpeg?auto=compress&cs=tinysrgb&w=1260&h=450&dpr=">
+            <div class="card-content">
+              <span class="blog-category">Travel</span>
+              <h3 class="card-title">Navigating the Souks: A Guide to Morocco's Vibrant Markets</h3>
+              <p class="card-excerpt">
+                Master the art of bargaining and discover authentic treasures in the labyrinthine markets of Marrakech and Fez.
+              </p>
+              <div class="article-meta">
+                <span>By Syraa Khalid • March 8, 2024</span>
+              </div>
+              <a href="#" class="read-more-btn">Read More</a>
+            </div>
+          </article>
+
+          <article class="article-card">
+            <img src="https://images.pexels.com/photos/868483/pexels-photo-868483.jpeg?auto=compress&cs=tinysrgb&w=1260&h=450&dpr=1">
+            <div class="card-content">
+              <span class="blog-category">Travel</span>
+              <h3 class="card-title">Patagonia Unplugged: Trekking the End of the World</h3>
+              <p class="card-excerpt">
+                Journey through dramatic landscapes where glaciers meet mountains and wildlife roams free in Earth's most pristine wilderness.
+              </p>
+              <div class="article-meta">
+                <span>By Syraa Khalid • March 5, 2024</span>
+              </div>
+              <a href="#" class="read-more-btn">Read More</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <!-- Popular Posts Widget -->
+        <div class="sidebar-widget">
+          <h3 class="widget-title">Popular This Week</h3>
+          <div class="popular-posts">
+            <div class="popular-post">
+              <img src="https://images.pexels.com/photos/1375883/pexels-photo-1375883.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Iceland landscape" class="popular-post-image">
+              <div class="popular-post-content">
+                <h4><span class="icon"></span> Chasing Northern Lights in Iceland</h4>
+                <span>March 12, 2024</span>
+              </div>
+            </div>
+            <div class="popular-post">
+              <img src="https://images.pexels.com/photos/703012/pexels-photo-703012.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Vietnamese street food" class="popular-post-image">
+              <div class="popular-post-content">
+                <h4><span class="icon"></span> Street Food Adventures in Vietnam</h4>
+                <span>March 9, 2024</span>
+              </div>
+            </div>
+            <div class="popular-post">
+              <img src="https://images.pexels.com/photos/28080/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Swiss Alps" class="popular-post-image">
+              <div class="popular-post-content">
+                <h4><span class="icon"></span> Hiking the Swiss Alps: A Beginner's Guide</h4>
+                <span>March 6, 2024</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tags Widget -->
+        <div class="sidebar-widget">
+          <h3 class="widget-title">Travel Tags</h3>
+          <div class="tags">
+            <a href="#" class="tag">Adventure</a>
+            <a href="#" class="tag">Culture</a>
+            <a href="#" class="tag">Photography</a>
+            <a href="#" class="tag">Budget Travel</a>
+            <a href="#" class="tag">Solo Travel</a>
+            <a href="#" class="tag">Food</a>
+            <a href="#" class="tag">Nature</a>
+            <a href="#" class="tag">History</a>
+          </div>
+        </div>
+
+        <!-- Newsletter Widget -->
+        <div class="sidebar-widget newsletter">
+          <h3 class="widget-title">Travel Newsletter</h3>
+          <p>Get weekly travel inspiration, tips, and exclusive destination guides delivered to your inbox.</p>
+          <input type="email" placeholder="Enter your email address">
+          <button type="submit">Subscribe Now</button>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <!-- About Column -->
+                <div class="footer-column">
+                    <h3>About LifeLens</h3>
+                    <p style="color: #bbb; margin-bottom: 15px;">LifeLens is dedicated to exploring diverse perspectives and insights to help you see the world through a different lens.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">f</a>
+                        <a href="#" class="social-link">t</a>
+                        <a href="https://www.instagram.com/trishastiktechnologys/" class="social-link">in</a>
+                        <a href="#" class="social-link">ig</a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Categories -->
+                <div class="footer-column">
+                    <h3>Categories</h3>
+                    <ul class="footer-links">
+                        <li><a href="travel.html">Travel</a></li>
+                        <li><a href="technology.html">Technology</a></li>
+                        <li><a href="food.html">Food</a></li>
+                        <li><a href="lifestyle.html">Lifestyle</a></li>
+                        <li><a href="health.html">Health</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Contact -->
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li>Email: </li>
+                        <li>Phone: </li>
+                        <li>Address: </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 LifeLens Blog. Syra Khalid.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
