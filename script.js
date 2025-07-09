@@ -1,3 +1,13 @@
+// Mobile Menu Toggle Script 
+    
+        const menuButton = document.querySelector('.mobile-menu-button');
+        const navMenu = document.querySelector('.nav-menu');
+
+        menuButton.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+        
+
 // Hero Carousel Functionality
 document.addEventListener('DOMContentLoaded', function() {
     const slides = document.querySelectorAll('.hero-slide');
