@@ -307,7 +307,7 @@ nav {
 
 /* Position mobile button on right */
 .mobile-menu-button {
-  position: absolute;
+  position: right;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
