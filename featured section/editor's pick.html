@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editor's Pick - My Blog</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #2c3e50;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Enhanced Header Design */
+    .blog-header {
+      background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 100px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blog-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .blog-header-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .blog-title {
+      font-size: 4rem;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -2px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .blog-subtitle {
+      font-size: 1.4rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      font-weight: 300;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .editor-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    /* Enhanced Breadcrumb */
+    .breadcrumb {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      padding: 20px 0;
+      border-bottom: 1px solid #e9ecef;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .breadcrumb-nav {
+      font-size: 15px;
+      color: #6c757d;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .breadcrumb-nav h3 {
+      color: #667eea;
+      font-weight: 700;
+    }
+
+    .breadcrumb-nav a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 5px 10px;
+      border-radius: 15px;
+    }
+
+    .breadcrumb-nav a:hover {
+      background: #667eea;
+      color: white;
+    }
+
+    /* Main Content */
+    .main-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 50px;
+      padding: 50px 0;
+      opacity: 0;
+      animation: slideUp 0.8s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .content-area {
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    /* Featured Article - Enhanced */
+    .featured-article {
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .article-image {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .article-image:hover {
+      transform: scale(1.02);
+    }
+
+    .article-content {
+      padding: 3rem;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .author-avatar {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #667eea;
+    }
+
+    .blog-category {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .article-title {
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      color: #2c3e50;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+
+    .article-excerpt {
+      color: #555;
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .read-more-btn {
+      display: inline-block;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .read-more-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Article Grid - Enhanced */
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 30px;
+      padding: 0 3rem 3rem;
+    }
+
+    .article-card {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .article-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .article-card:hover .card-image {
+      transform: scale(1.05);
+    }
+
+    .card-content {
+      padding: 2rem;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #2c3e50;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .card-excerpt {
+      color: #666;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* Sidebar - Enhanced */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .sidebar-widget {
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .widget-title {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      color: #2c3e50;
+      font-weight: 700;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .widget-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 3px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 2px;
+    }
+
+    .popular-posts {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .popular-post {
+      display: flex;
+      gap: 15px;
+      padding: 15px;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .popular-post:hover {
+      background: rgba(102, 126, 234, 0.05);
+      transform: translateX(5px);
+    }
+
+    .popular-post-image {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    .popular-post-content h4 {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      color: #2c3e50;
+      font-weight: 600;
+    }
+
+    .popular-post-content span {
+      font-size: 0.8rem;
+      color: #667eea;
+      font-weight: 500;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+      padding: 8px 15px;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      border: 1px solid rgba(102, 126, 234, 0.2);
+    }
+
+    .tag:hover {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .newsletter {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      text-align: center;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.3);
+    }
+
+    .newsletter input {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      margin: 20px 0;
+      font-size: 16px;
+      background: rgba(255,255,255,0.9);
+    }
+
+    .newsletter button {
+      background: white;
+      color: #667eea;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer */
+    .footer {
+      background: linear-gradient(135deg, #2c3e50, #34495e);
+      color: #fff;
+      padding: 60px 0 20px;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h3 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-column h3:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 30px;
+      height: 2px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #bbb;
+      transition: color 0.3s;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: #667eea;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(102, 126, 234, 0.2);
+      border-radius: 50%;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #444;
+      color: #999;
+      font-size: 14px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .main-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      .article-image {
+        height: 300px;
+      }
+
+      .article-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1.5rem 1.5rem;
+      }
+
+      .article-meta {
+        flex-wrap: wrap;
+      }
+
+      .blog-title {
+        font-size: 2.5rem;
+      }
+
+      .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="blog-header">
+    <div class="container">
+      <div class="blog-header-content">
+        <div class="editor-badge">✨ Curated by Our Editorial Team</div>
+        <h1 class="blog-title">Editor's Pick</h1>
+        <p class="blog-subtitle">Handpicked stories that inspire, inform, and captivate. Our editorial team's finest selections from across all categories.</p>
+      </div>
+    </div>
+  </header>
+  
+  <nav class="breadcrumb">
+    <div class="container">
+      <div class="breadcrumb-nav">
+        <h3>Featured</h3>
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <a href="most-popular.html">Most Popular</a>
+        <span>/</span>
+        <a href="recent-posts.html">Recent Posts</a>
+        <span>/</span>
+        <span>Editor's Pick</span>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container">
+    <main class="main-content">
+      <div class="content-area">
+        <!-- Featured Article -->
+        <article class="featured-article">
+          <img src="https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="AI Technology" class="article-image">
+          <div class="article-content">
+            <span class="blog-category">Editor's Choice</span>
+            <h2 class="article-title">The Future of Artificial Intelligence: Beyond Science Fiction</h2>
+            <p class="article-excerpt">
+              Explore how AI is reshaping industries, transforming daily life, and creating possibilities we never imagined. From healthcare breakthroughs to creative partnerships, discover the real-world applications that are defining our future today.
+            </p>
+            <div class="article-meta">
+              <div class="author-info">
+                <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&dpr=1" alt="Alex Thompson" class="author-avatar">
+                <span>By Alex Thompson</span>
+              </div>
+              <span>•</span>
+              <span>March 20, 2024</span>
+              <span>•</span>
+              <span>12 min read</span>
+            </div>
+            <a href="#" class="read-more-btn">Continue Reading</a>
+          </div>
+        </article>
+
+        <!-- Article Grid -->
+        <div class="article-grid">
+          <article class="article-card">
+            <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=450&dpr=1" alt="Sustainable Living" class="card-image">
+            <div class="card-content">
+              <span class="blog-category">Lifestyle</span>
+              <h3 class="card-title">Zero Waste Living: Small Changes, Big Impact</h3>
+              <p class="card-excerpt">
+                Transform your lifestyle with practical zero-waste strategies that benefit both your wallet and the planet.
+              </p>
+              <div class="article-meta">
+                <span>By Maria Santos • March 18, 2024</span>
+              </div>
+              <a href="#" class="read-more-btn">Read More</a>
+            </div>
+          </article>
+
+          <article class="article-card">
+            <img src="https://images.pexels.com/photos/1640773/pexels-photo-1640773.jpeg?auto=compress&cs=tinysrgb&w=1260&h=450&dpr=1" alt="Mental Health" class="card-image">
+            <div class="card-content">
+              <span class="blog-category">Health</span>
+              <h3 class="card-title">Mindfulness in the Digital Age: Finding Balance</h3>
+              <p class="card-excerpt">
+                Discover effective strategies to maintain mental wellness while navigating our hyperconnected world.
+              </p>
+              <div class="article-meta">
+                <span>By Dr. Sarah Kim • March 16, 2024</span>
+              </div>
+              <a href="#" class="read-more-btn">Read More</a>
+            </div>
+          </article>
+
+          <article class="article-card">
+            <img src="https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1260&h=450&dpr=1" alt="Culinary Arts" class="card-image">
+            <div class="card-content">
+              <span class="blog-category">Food</span>
+              <h3 class="card-title">Plant-Based Gourmet: Elevating Vegetarian Cuisine</h3>
+              <p class="card-excerpt">
+                Explore sophisticated plant-based cooking techniques that rival traditional gourmet cuisine.
+              </p>
+              <div class="article-meta">
+                <span>By Chef Roberto • March 14, 2024</span>
+              </div>
+              <a href="#" class="read-more-btn">Read More</a>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <aside class="sidebar">
+        <!-- Popular Posts Widget -->
+        <div class="sidebar-widget">
+          <h3 class="widget-title">Trending Now</h3>
+          <div class="popular-posts">
+            <div class="popular-post">
+              <img src="https://images.pexels.com/photos/2323398/pexels-photo-2323398.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&dpr=1" alt="Remote Work" class="popular-post-image">
+              <div class="popular-post-content">
+                <h4>The Future of Remote Work Culture</h4>
+                <span>March 19, 2024</span>
+              </div>
+            </div>
+            <div class="popular-post">
+              <img src="https://images.pexels.com/photos/1068523/pexels-photo-1068523.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&dpr=1" alt="Photography" class="popular-post-image">
+              <div class="popular-post-content">
+                <h4>Mastering Mobile Photography</h4>
+                <span>March 17, 2024</span>
+              </div>
+            </div>
+            <div class="popular-post">
+              <img src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&dpr=1" alt="Innovation" class="popular-post-image">
+              <div class="popular-post-content">
+                <h4>Innovation in Sustainable Technology</h4>
+                <span>March 15, 2024</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tags Widget -->
+        <div class="sidebar-widget">
+          <h3 class="widget-title">Popular Topics</h3>
+          <div class="tags">
+            <a href="#" class="tag">Innovation</a>
+            <a href="#" class="tag">Wellness</a>
+            <a href="#" class="tag">Technology</a>
+            <a href="#" class="tag">Sustainability</a>
+            <a href="#" class="tag">Creativity</a>
+            <a href="#" class="tag">Future</a>
+            <a href="#" class="tag">Science</a>
+            <a href="#" class="tag">Culture</a>
+          </div>
+        </div>
+
+        <!-- Newsletter Widget -->
+        <div class="sidebar-widget newsletter">
+          <h3 class="widget-title">Editor's Weekly</h3>
+          <p>Get our editorial team's top picks and exclusive insights delivered weekly.</p>
+          <input type="email" placeholder="Enter your email address">
+          <button type="submit">Subscribe Now</button>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-container">
+        <!-- About Column -->
+        <div class="footer-column">
+          <h3>About LifeLens</h3>
+          <p style="color: #bbb; margin-bottom: 15px;">LifeLens is dedicated to exploring diverse perspectives and insights to help you see the world through a different lens.</p>
+          <div class="social-links">
+            <a href="#" class="social-link">f</a>
+            <a href="#" class="social-link">t</a>
+            <a href="https://www.instagram.com/trishastiktechnologys/" class="social-link">in</a>
+            <a href="#" class="social-link">ig</a>
+          </div>
+        </div>
+        
+        <!-- Quick Links -->
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+        </div>
+        
+        <!-- Categories -->
+        <div class="footer-column">
+          <h3>Categories</h3>
+          <ul class="footer-links">
+            <li><a href="travel.html">Travel</a></li>
+            <li><a href="technology.html">Technology</a></li>
+            <li><a href="food.html">Food</a></li>
+            <li><a href="lifestyle.html">Lifestyle</a></li>
+            <li><a href="health.html">Health</a></li>
+          </ul>
+        </div>
+        
+        <!-- Contact -->
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="footer-links">
+            <li>Email: contact@lifelens.com</li>
+            <li>Phone: +1 (555) 123-4567</li>
+            <li>Address: 123 Blog Street, Digital City</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 LifeLens Blog. Syra Khalid.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
