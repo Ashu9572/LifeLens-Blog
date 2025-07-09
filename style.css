@@ -283,51 +283,30 @@
             to { transform: rotate(360deg); }
         }
 
-        .header {
+        .nav-menu {
   display: flex;
-  align-items: right;
-  justify-content: space-between;
-  position: relative;
+  gap: 20px;
+  list-style: none;
 }
 
-/* Make sure all inner elements are spaced properly */
-.logo {
-  flex: 1;
-}
-
-nav {
-  flex: 2;
-}
-
-.search-bar {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-
-/* Position mobile button on right */
 .mobile-menu-button {
-  position: right;
-  right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
   display: none;
   font-size: 28px;
   background: none;
   border: none;
   color: #333;
   cursor: pointer;
-  z-index: 1000;
 }
 
+/* 🔻 Responsive for Mobile */
 @media (max-width: 768px) {
   .nav-menu {
     display: none;
     flex-direction: column;
     background-color: #333;
     position: absolute;
-    top: 100%;
-    right: 0;
+    top: 80px; /* Adjust to match your header height */
+    right: 10px;
     width: 220px;
     padding: 15px;
     z-index: 999;
@@ -349,10 +328,15 @@ nav {
   }
 
   .search-bar {
-    display: none; /* optional: hide search bar on small screens */
+    display: none; /* optional: hide search bar on mobile */
   }
 }
 
+@media (min-width: 769px) {
+  .mobile-menu-button {
+    display: none;
+  }
+}
 
         /* Hero Carousel Styles */
         .hero {
