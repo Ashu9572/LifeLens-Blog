@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel - My Blog</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Base Reset & Body */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f8f9fa;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Container */
+.container {
+  max-width: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Header */
+.blog-header {
+  background: linear-gradient(to right, #2c3e50, #34495e);
+  color: white;
+  padding: clamp(4rem, 15vw, 8rem) 1rem;
+  text-align: center;
+  position: relative;
+}
+.blog-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://hikerwolf.com/wp-content/uploads/2021/02/images.jpeg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+}
+.blog-header-content {
+  position: relative;
+  z-index: 1;
+}
+.blog-title {
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.blog-subtitle {
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  background: white;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.breadcrumb-nav {
+  font-size: clamp(0.75rem, 2.5vw, 0.875rem);
+  color: #6c757d;
+  margin-left: clamp(1rem, 3vw, 2rem);
+}
+.breadcrumb-nav a {
+  color: #2c3e50;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.breadcrumb-nav a:hover {
+  color: #3498db;
+  text-decoration: underline;
+}
+
+.blog-page {
+  flex: 1;
+  width: 100%;
+}
+
+/* Main Content */
+.main-content {
+  display: block;
+  width: 100%;
+  padding: clamp(1rem, 5vw, 2rem) 1rem;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+}
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+.content-area {
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Article */
+.featured-article {
+  margin-bottom: 2rem;
+}
+.article-image {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+.article-content {
+  padding: clamp(1rem, 4vw, 2rem);
+}
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  color: #666;
+  margin-bottom: 1.25rem;
+}
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.author-avatar {
+  width: clamp(25px, 6vw, 30px);
+  height: clamp(25px, 6vw, 30px);
+  border-radius: 50%;
+  object-fit: cover;
+}
+.blog-category {
+  background: #ff7e5f;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: clamp(0.7rem, 2vw, 0.8rem);
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.article-title {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  margin-bottom: 1rem;
+  color: #333;
+}
+.article-excerpt {
+  margin-bottom: 2rem;
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  line-height: 1.7;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  position: relative;
+}
+.article-excerpt::before {
+  content: '"';
+  font-size: clamp(2rem, 8vw, 3rem);
+  color: #ff7e5f;
+  position: absolute;
+  top: -10px;
+  left: 15px;
+  opacity: 0.3;
+  font-family: Georgia, serif;
+}
+.article-excerpt p {
+  margin-bottom: 1rem;
+  text-align: justify;
+}
+.article-excerpt p:last-child {
+  margin-bottom: 0;
+}
+.read-more-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff7e5f, #feb47b);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 126, 95, 0.3);
+}
+.read-more-btn:hover {
+  background: linear-gradient(135deg, #feb47b, #ff7e5f);
+  transform: translateY(-2px);
+}
+
+/* Sidebar */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.sidebar-widget {
+  background: white;
+  padding: clamp(1rem, 4vw, 1.5rem);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+.widget-title {
+  font-size: clamp(1.1rem, 3.5vw, 1.3rem);
+  margin-bottom: 1rem;
+  color: #333;
+  font-weight: 700;
+}
+.popular-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.popular-post {
+  display: flex;
+  gap: 0.75rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+.popular-post:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.popular-post-image {
+  width: clamp(50px, 15vw, 60px);
+  height: clamp(50px, 15vw, 60px);
+  object-fit: cover;
+}
+.popular-post-content h4 {
+  font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  margin-bottom: 0.25rem;
+}
+.popular-post-content span {
+  font-size: clamp(0.7rem, 2vw, 0.8rem);
+  color: #666;
+}
+
+/* Tags and Newsletter */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.tag {
+  background: #f0f0f0;
+  color: #666;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: clamp(0.75rem, 2.2vw, 0.85rem);
+  text-decoration: none;
+}
+.tag:hover {
+  background: #ff7e5f;
+  color: white;
+}
+.newsletter {
+  background: linear-gradient(135deg, #ac8379, #8a715e);
+  color: white;
+  text-align: center;
+  padding: clamp(1.5rem, 5vw, 2rem);
+  max-width: 100%;
+  border-radius: 0.5rem;
+}
+.newsletter input,
+.newsletter button {
+  width: 100%;
+  padding: clamp(0.5rem, 2.5vw, 0.75rem);
+  border: none;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+}
+.newsletter button {
+  background: white;
+  color: #ff7e5f;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+.newsletter button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+.footer {
+  background-color: #222;
+  color: #fff;
+  padding: clamp(2rem, 8vw, 4rem) 1rem 1rem;
+  margin-top: auto;
+}
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: clamp(1rem, 5vw, 2rem);
+  margin-bottom: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.footer-column h3 {
+  font-size: clamp(1rem, 3vw, 1.1rem);
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+.footer-column h3::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 30px;
+  height: 2px;
+  background: #4a90e2;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+}
+
+.logo-highlight {
+  color: #4a90e2;
+}
+
+.footer-links {
+  list-style: none;
+}
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+.footer-links a {
+  color: #bbb;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover {
+  color: #4a90e2;
+}
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.social-link {
+  width: clamp(30px, 8vw, 36px);
+  height: clamp(30px, 8vw, 36px);
+  background: #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+}
+.social-link:hover {
+  background: #4a90e2;
+}
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #444;
+  padding-top: 1rem;
+  font-size: clamp(0.75rem, 2.5vw, 0.875rem);
+  color: #999;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Extra Small Devices (Smartphones: <576px) */
+@media (max-width: 575.98px) {
+  html {
+    font-size: 14px;
+  }
+  .container {
+    padding: 0 0.5rem;
+  }
+  .blog-header {
+    padding: clamp(2rem, 10vw, 4rem) 0.5rem;
+  }
+  .blog-title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+  .blog-subtitle {
+    font-size: clamp(0.9rem, 3vw, 1rem);
+  }
+  .breadcrumb-nav {
+    margin-left: 0.5rem;
+  }
+  .main-content {
+    padding: 1rem 0.5rem;
+  }
+  .article-content {
+    padding: 1rem;
+  }
+  .article-image {
+    aspect-ratio: 4/3;
+  }
+  .article-title {
+    font-size: clamp(1.2rem, 5vw, 1.5rem);
+  }
+  .article-excerpt {
+    padding: 1rem;
+  }
+  .sidebar {
+    margin-top: 1rem;
+  }
+  .sidebar-widget {
+    padding: 1rem;
+  }
+  .newsletter {
+    padding: 1rem;
+  }
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Small Devices (Tablets: 576px–767px) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  html {
+    font-size: 15px;
+  }
+  .container {
+    padding: 0 1rem;
+  }
+  .main-content {
+    padding: 1.5rem 1rem;
+  }
+  .article-image {
+    height: 250px;
+  }
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* Medium Devices (Tablets/Large Tablets: 768px–991px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  html {
+    font-size: 15px;
+  }
+  .main-content {
+    padding: 2rem 1.5rem;
+  }
+  .article-image {
+    height: 300px;
+  }
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Large Devices (Desktops: 992px–1199px) */
+@media (min-width: 992px) {
+  .main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .content-area {
+    max-width: 100%;
+  }
+  .sidebar {
+    margin-top: 0;
+  }
+  .article-image {
+    height: 350px;
+  }
+  .footer-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Extra Large Devices (Large Desktops: ≥1200px) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1200px;
+  }
+  .main-content {
+    padding: 3rem 2rem;
+  }
+  .article-image {
+    height: 400px;
+  }
+  .footer-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+  </style>
+</head>
+
+<body>
+  <nav class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-nav">
+              <h3>Categories</h3>
+                  <a href="../index.html">Home</a> / <a href="/categories section/travel.html">Travel</a> / <a href="/categories section/food.html">Food</a> / <a href="/categories section/technology.html">Technology</a> / <a href="/categories section/lifestyle.html">Lifestyle</a> / <a href="/categories section/health.html">Health</a> / <span>Food</span>
+            </div>
+        </div>
+    </nav>
+
+  <div class="blog-page">
+    <div class="container">
+      <main class="main-content">
+        <div class="content-area">
+          <!-- Featured Article -->
+          <article class="featured-article">
+            <img
+              src="https://hikerwolf.com/wp-content/uploads/2021/02/images.jpeg"
+              alt="Himalayan Mountain Range"
+              class="article-image"
+            />
+            <div class="article-content">
+              <span class="blog-category">Travel</span>
+              <h2 class="article-title">
+                Rediscovering Ancient Paths: A Journey Through the Himalayas
+              </h2>
+              <div class="article-meta">
+                <div class="author-info">
+                  <img
+                    src="https://media.licdn.com/dms/image/v2/D4D03AQHkH8St5JCIKg/profile-displayphoto-shrink_800_800/B4DZY4pBvpHsAk-/0/1744707002037?e=1753315200&v=beta&t=I6H94aQLubmqhQWQ-SuX4fn1H4p61HVH-80hHcrdWfg"
+                    alt="Syraa Khalid"
+                    class="author-avatar"
+                  />
+                  <span>By Syraa Khalid</span>
+                </div>
+                <span>•</span>
+                <span>March 15, 2024</span>
+                <span>•</span>
+                <span>8 min read</span>
+              </div>
+              <div class="article-excerpt">
+                <p>
+                  Venture beyond the crowded tourist trails to discover the mystical beauty of the Himalayas, where ancient paths wind through breathtaking landscapes and sacred temples stand as testaments to centuries of spiritual devotion.
+                </p>
+                <p>
+                  From the cliff-hanging monasteries of Ladakh to the mystical valleys of Nepal, each step on these ancient routes reveals stories of pilgrims, traders, and adventurers who have walked these same paths for millennia. Experience the profound serenity of high-altitude meditation, witness sunrise over snow-capped peaks, and discover how the thin mountain air can transform both body and soul.
+                </p>
+                <p>
+                  This journey isn't just about reaching destinations—it's about embracing the timeless wisdom of the mountains and finding your own path to inner peace amidst some of the world's most spectacular scenery.
+                </p>
+                <p>
+                  From the cliff-hanging monasteries of Ladakh to the mystical valleys of Nepal, each step on these ancient routes reveals stories of pilgrims, traders, and adventurers who have walked these same paths for millennia. Experience the profound serenity of high-altitude meditation, witness sunrise over snow-capped peaks, and discover how the thin mountain air can transform both body and soul.
+                </p>
+                <p>
+                  This journey isn't just about reaching destinations—it's about embracing the timeless wisdom of the mountains and finding your own path to inner peace amidst some of the world's most spectacular scenery.
+                </p>
+                <p>
+                  Venture beyond the crowded tourist trails to discover the mystical beauty of the Himalayas, where ancient paths wind through breathtaking landscapes and sacred temples stand as testaments to centuries of spiritual devotion.
+                </p>
+                <p>
+                  From the cliff-hanging monasteries of Ladakh to the mystical valleys of Nepal, each step on these ancient routes reveals stories of pilgrims, traders, and adventurers who have walked these same paths for millennia. Experience the profound serenity of high-altitude meditation, witness sunrise over snow-capped peaks, and discover how the thin mountain air can transform both body and soul.
+                </p>
+                <p>
+                  This journey isn't just about reaching destinations—it's about embracing the timeless wisdom of the mountains and finding your own path to inner peace amidst some of the world's most spectacular scenery.
+                </p>
+                <p>
+                  From the cliff-hanging monasteries of Ladakh to the mystical valleys of Nepal, each step on these ancient routes reveals stories of pilgrims, traders, and adventurers who have walked these same paths for millennia. Experience the profound serenity of high-altitude meditation, witness sunrise over snow-capped peaks, and discover how the thin mountain air can transform both body and soul.
+                </p>
+                <p>
+                  This journey isn't just about reaching destinations—it's about embracing the timeless wisdom of the mountains and finding your own path to inner peace amidst some of the world's most spectacular scenery.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </main>
+    </div>
+  </div>
+
+<footer class="footer">
+    <div class="container">
+      <div class="footer-container">
+        <!-- About -->
+        <div class="footer-column">
+          <h3>About LifeLens</h3>
+          <div>
+            <h1 class="logo-text"><span class="logo-highlight">Life</span>Lens Blog</h1>
+          </div>   
+          <p style="color: #bbb; margin-top: 10px; margin-bottom: 15px">
+            LifeLens is dedicated to exploring diverse perspectives and
+            insights to help you see the world through a different lens.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link">f</a>
+            <a href="#" class="social-link">t</a>
+            <a href="https://www.instagram.com/trishastiktechnologys/" class="social-link">in</a>
+            <a href="#" class="social-link">ig</a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-column">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../about.html">About Us</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Categories -->
+        <div class="footer-column">
+          <h3>Categories</h3>
+          <ul class="footer-links">
+            <li><a href="/categories section/travel.html">Travel</a></li>
+            <li><a href="/categories section/technology.html">Technology</a></li>
+            <li><a href="/categories section/food.html">Food</a></li>
+            <li><a href="/categories section/lifestyle.html">Lifestyle</a></li>
+            <li><a href="/categories section/health.html">Health</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="footer-column">
+          <h3>Contact Us</h3>
+          <ul class="footer-links">
+            <li>Email: info@lifelens.com</li>
+            <li>Phone: +1 (555) 123-4567</li>
+            <li>Address: 123 Blog Street, Digital City</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 LifeLens Blog. Syra Khalid.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
