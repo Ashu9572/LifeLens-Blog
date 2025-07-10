@@ -330,6 +330,22 @@ body {
   height: 2px;
   background: #4a90e2;
 }
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+}
+
+.logo-highlight {
+  color: #4a90e2;
+}
+
 .footer-links {
   list-style: none;
 }
@@ -502,16 +518,13 @@ body {
 
 <body>
   <nav class="breadcrumb">
-    <div class="container">
-      <div class="breadcrumb-nav">
-        <h3>Categories</h3>
-        <a href="../index.html">Home</a> / <a href="food.html">Food</a> /
-        <a href="technology.html">Technology</a> /
-        <a href="lifestyle.html">Lifestyle</a> /
-        <a href="health.html">Health</a> / <span>Travel</span>
-      </div>
-    </div>
-  </nav>
+        <div class="container">
+            <div class="breadcrumb-nav">
+              <h3>Categories</h3>
+                  <a href="../index.html">Home</a> / <a href="/categories section/travel.html">Travel</a> / <a href="/categories section/food.html">Food</a> / <a href="/categories section/technology.html">Technology</a> / <a href="/categories section/lifestyle.html">Lifestyle</a> / <a href="/categories section/health.html">Health</a> / <span>Food</span>
+            </div>
+        </div>
+    </nav>
 
   <div class="blog-page">
     <div class="container">
@@ -588,7 +601,10 @@ body {
         <!-- About -->
         <div class="footer-column">
           <h3>About LifeLens</h3>
-          <p style="color: #bbb; margin-bottom: 15px">
+          <div>
+            <h1 class="logo-text"><span class="logo-highlight">Life</span>Lens Blog</h1>
+          </div>   
+          <p style="color: #bbb; margin-top: 10px; margin-bottom: 15px">
             LifeLens is dedicated to exploring diverse perspectives and
             insights to help you see the world through a different lens.
           </p>
@@ -614,11 +630,11 @@ body {
         <div class="footer-column">
           <h3>Categories</h3>
           <ul class="footer-links">
-            <li><a href="travel.html">Travel</a></li>
-            <li><a href="technology.html">Technology</a></li>
-            <li><a href="food.html">Food</a></li>
-            <li><a href="lifestyle.html">Lifestyle</a></li>
-            <li><a href="health.html">Health</a></li>
+            <li><a href="/categories section/travel.html">Travel</a></li>
+            <li><a href="/categories section/technology.html">Technology</a></li>
+            <li><a href="/categories section/food.html">Food</a></li>
+            <li><a href="/categories section/lifestyle.html">Lifestyle</a></li>
+            <li><a href="/categories section/health.html">Health</a></li>
           </ul>
         </div>
 
