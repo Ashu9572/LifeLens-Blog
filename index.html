@@ -6,47 +6,47 @@
     <title>LifeLens Blog - Home</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<!-- Header -->
+<body>
+    <!-- Header -->
     <div class="header-container">
-        <header class="header">
-            <div class="logo">
-                <h1 class="logo-text"><span class="logo-highlight">Life</span>Lens Blog</h1>
-            </div>
-
-            <!-- ☰ Mobile Menu Button -->
-            <button class="mobile-menu-button">☰</button>
-
-            <nav>
-                <ul class="nav-menu">
-                    <li class="nav-item"><a href="Index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item has-dropdown">
-                        <a href="categories.html" class="nav-link dropdown-toggle">Categories</a>
-                        <ul class="dropdown">
-                            <li class="dropdown-item"><a href="categories section/travel.html" class="dropdown-link">Travel</a></li>
-                            <li class="dropdown-item"><a href="categories section/food.html" class="dropdown-link">Food</a></li>
-                            <li class="dropdown-item"><a href="categories section/technology.html" class="dropdown-link">Technology</a></li>
-                            <li class="dropdown-item"><a href="categories section/lifestyle.html" class="dropdown-link">Lifestyle</a></li>
-                            <li class="dropdown-item"><a href="categories section/health.html" class="dropdown-link">Health</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item has-dropdown">
-                        <a href="#" class="nav-link dropdown-toggle">Featured</a>
-                        <ul class="dropdown">
-                            <li class="dropdown-item"><a href="featured section/editor's pick.html" class="dropdown-link">Editor's Pick</a></li>
-                            <li class="dropdown-item"><a href="featured section/most popular.html" class="dropdown-link">Most Popular</a></li>
-                            <li class="dropdown-item"><a href="featured section/recent post.html" class="dropdown-link">Recent Posts</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
-
-            <div class="search-bar">
-                <input type="text" class="search-input" placeholder="Search...">
-            </div>
-        </header>
+  <header class="header">
+    <div class="logo">
+      <h1 class="logo-text"><span class="logo-highlight">Life</span>Lens Blog</h1>
     </div>
+    
+    <nav>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="Index.html" class="nav-link">Home</a></li>
+        <li class="nav-item has-dropdown">
+          <a href="categories.html" class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">Categories</a>
+          <ul class="dropdown">
+            <li class="dropdown-item"><a href="categories section/travel.html" class="dropdown-link">Travel</a></li>
+            <li class="dropdown-item"><a href="categories section/food.html" class="dropdown-link">Food</a></li>
+            <li class="dropdown-item"><a href="categories section/technology.html" class="dropdown-link">Technology</a></li>
+            <li class="dropdown-item"><a href="categories section/lifestyle.html" class="dropdown-link">Lifestyle</a></li>
+            <li class="dropdown-item"><a href="categories section/health.html" class="dropdown-link">Health</a></li>
+          </ul>
+        </li>
+        <li class="nav-item has-dropdown">
+          <a href="#" class="nav-link dropdown-toggle" aria-expanded="false" aria-haspopup="true">Featured</a>
+          <ul class="dropdown">
+            <li class="dropdown-item"><a href="featured section/editor's pick.html" class="dropdown-link">Editor's Pick</a></li>
+            <li class="dropdown-item"><a href="featured section/most popular.html" class="dropdown-link">Most Popular</a></li>
+            <li class="dropdown-item"><a href="featured section/recent post.html" class="dropdown-link">Recent Posts</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+    
+    <div class="search-bar">
+      <input type="text" class="search-input" placeholder="Search..." aria-label="Search blog posts">
+    </div>
+    
+    <button class="mobile-menu-button" aria-label="Toggle mobile menu" aria-expanded="false">☰</button>
+  </header>
+</div>
 
     <!-- Search Results Container - Place this right after your header in the HTML -->
 <div class="search-results-container" id="searchResults">
@@ -353,7 +353,10 @@
                 <!-- About Column -->
                 <div class="footer-column">
                     <h3>About LifeLens</h3>
-                    <p style="color: #bbb; margin-bottom: 15px;">LifeLens is dedicated to exploring diverse perspectives and insights to help you see the world through a different lens.</p>
+                    <div>
+                        <h1 class="logo-text"><span class="logo-highlight">Life</span>Lens Blog</h1>
+                    </div>
+                    <p style="color: #bbb; margin-bottom: 15px; margin-top: 10px;">LifeLens is dedicated to exploring diverse perspectives and insights to help you see the world through a different lens.</p>
                     <div class="social-links">
                         <a href="#" class="social-link">f</a>
                         <a href="#" class="social-link">t</a>
@@ -379,6 +382,8 @@
                         <li><a href="categories section/travel.html">Travel</a></li>
                         <li><a href="categories section/technology.html">Technology</a></li>
                         <li><a href="categories section/food.html">Food</a></li>
+                        <li><a href="categories section/lifestyle.html">Lifestyle</a></li>
+                        <li><a href="categories section/health.html">Health</a></li>
                     </ul>
                 </div>
                 
