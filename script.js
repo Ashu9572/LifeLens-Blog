@@ -1,41 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Mobile Menu Toggle
   const mobileMenuButton = document.querySelector('.mobile-menu-button');
   const navMenu = document.querySelector('.nav-menu');
 
   mobileMenuButton.addEventListener('click', () => {
-    // Toggle the .active class on nav-menu
     navMenu.classList.toggle('active');
-
-    // Update aria-expanded for accessibility
     const isExpanded = navMenu.classList.contains('active');
     mobileMenuButton.setAttribute('aria-expanded', isExpanded);
-
-    // Optional: Change button icon (e.g., hamburger to close)
     mobileMenuButton.textContent = isExpanded ? '✕' : '☰';
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = isExpanded ? 'hidden' : 'auto';
   });
 
-  // Handle dropdowns within the mobile menu
-  const dropdownToggles = document.querySelectorAll('.has-dropdown .nav-link');
+  // Dropdown Toggle (Mobile Only)
+  const dropdownToggles = document.querySelectorAll('.has-dropdown .dropdown-toggle');
   dropdownToggles.forEach(toggle => {
     toggle.addEventListener('click', (e) => {
-      // Prevent default link behavior on mobile
       if (window.innerWidth <= 768) {
-        e.preventDefault();
+        e.preventDefault(); // Prevent navigation on mobile
         const parent = toggle.parentElement;
         parent.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', parent.classList.contains('active'));
       }
     });
   });
 
-  // Close menu when clicking outside on mobile
+  // Search Bar Functionality
+  const searchInput = document.querySelector('.search-input');
+  const searchResultsContainer = document.querySelector('.search-results-container') || document.createElement('div'); // Fallback if not present
+  searchResultsContainer.classList.add('search-results-container');
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.trim();
+    searchResultsContainer.classList.toggle('active', query.length > 0);
+    // Placeholder for search logic (e.g., fetch results)
+    // Example: searchResultsContainer.innerHTML = `<div class="search-results-header">Results for "${query}"</div>`;
+  });
+
+  // Close Menu/Search on Outside Click
   document.addEventListener('click', (e) => {
-    if (window.innerWidth <= 768 && !navMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
-      navMenu.classList.remove('active');
-      mobileMenuButton.setAttribute('aria-expanded', 'false');
-      mobileMenuButton.textContent = '☰';
+    if (window.innerWidth <= 768) {
+      if (!navMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+        navMenu.classList.remove('active');
+        mobileMenuButton.setAttribute('aria-expanded', 'false');
+        mobileMenuButton.textContent = '☰';
+        document.body.style.overflow = 'auto';
+      }
+      if (!searchInput.contains(e.target) && !searchResultsContainer.contains(e.target)) {
+        searchResultsContainer.classList.remove('active');
+      }
     }
   });
 });
+        
 
 // Hero Carousel Functionality
 document.addEventListener('DOMContentLoaded', function() {
