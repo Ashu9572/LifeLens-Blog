@@ -1,12 +1,41 @@
-// Mobile Menu Toggle Script 
-    
-        const menuButton = document.querySelector('.mobile-menu-button');
-        const navMenu = document.querySelector('.nav-menu');
+document.addEventListener('DOMContentLoaded', () => {
+  const mobileMenuButton = document.querySelector('.mobile-menu-button');
+  const navMenu = document.querySelector('.nav-menu');
 
-        menuButton.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-        
+  mobileMenuButton.addEventListener('click', () => {
+    // Toggle the .active class on nav-menu
+    navMenu.classList.toggle('active');
+
+    // Update aria-expanded for accessibility
+    const isExpanded = navMenu.classList.contains('active');
+    mobileMenuButton.setAttribute('aria-expanded', isExpanded);
+
+    // Optional: Change button icon (e.g., hamburger to close)
+    mobileMenuButton.textContent = isExpanded ? '✕' : '☰';
+  });
+
+  // Handle dropdowns within the mobile menu
+  const dropdownToggles = document.querySelectorAll('.has-dropdown .nav-link');
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      // Prevent default link behavior on mobile
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        const parent = toggle.parentElement;
+        parent.classList.toggle('active');
+      }
+    });
+  });
+
+  // Close menu when clicking outside on mobile
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768 && !navMenu.contains(e.target) && !mobileMenuButton.contains(e.target)) {
+      navMenu.classList.remove('active');
+      mobileMenuButton.setAttribute('aria-expanded', 'false');
+      mobileMenuButton.textContent = '☰';
+    }
+  });
+});
 
 // Hero Carousel Functionality
 document.addEventListener('DOMContentLoaded', function() {
